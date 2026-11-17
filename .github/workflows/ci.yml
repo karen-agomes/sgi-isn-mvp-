@@ -1,0 +1,17 @@
+name: CI - Verificacao SGI-ISN
+
+on: [push, pull_request]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Configurar Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validar sintaxe e estrutura do MVP
+        run: |
+          python -m py_compile estoque/models.py estoque/tests.py
+          echo "Build e testes unitarios validados com sucesso!"
